@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const path = require("path");
 const fs = require("fs");
-var port = 8080;
+var port = 3000;
 var ip = require("ip");
 var directory = `W:\\torrent`;
 var videos = [];
@@ -43,13 +43,21 @@ app.set("views",path.join(__dirname,"views"));
 
 
 videos = fromDir(directory);
-videoNames = [];
+videos = videos.map(function(video){
+    return {
+        name : path.basename(video),
+        file : video,
+        url : path.basename(video).replace(/[^A-Z0-9]/ig, "-")
+    };
+});
+
 for(var video of videos){
-    videoNames.push(bindExpressRoute(video));
+    bindExpressRoute(video);
 }
 
+
 app.get("/",function(req,res){
-    res.render("index",{videos : videoNames});
+    res.render("index",{videos : videos});
 });
 
 
@@ -60,7 +68,6 @@ app.get("/",function(req,res){
 function fromDir(startPath){
     var items = [];
     if (!fs.existsSync(startPath)){
-        console.log("Invalid Path : ",startPath);
         return items;
     }
 
@@ -78,10 +85,10 @@ function fromDir(startPath){
 };
 
 function bindExpressRoute(video){
-    app.use("/video/"+path.basename(video),function(req,res){
-        res.sendFile(video);
+    app.get("/video/"+video.url,function(req,res){
+        res.sendFile(video.file);
     });
-    return path.basename(video);
+    return video;
 }
 
 

@@ -21,7 +21,7 @@
             </div>
             <% for(var video of videos){ %>
             <div class="col-lg-4 col-sm-6 mb-3">
-               <button class="btn btn-primary w-100 text-center play_btn" data-video_url="/video/<%- video %>"><%- video %></button>
+               <button class="btn btn-primary w-100 text-center play_btn" data-video_url="/video/<%- video.url %>"><%- video.name %></button>
             </div>
             <% }%>
         </div>
