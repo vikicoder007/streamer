@@ -15,7 +15,7 @@ const rl = readline.createInterface({
 
 
 
-rl.question("Please enter  the port for server : (8080 Default)", function(portInput) {
+rl.question("Please enter  the port for server : ("+port+" Default)", function(portInput) {
     rl.question("Please enter the path form where videos will be served :", function(pathInput) {
         port = (portInput == "" || isNaN(portInput)) ? port : portInput;
         directory = pathInput == "" ? directory : pathInput;

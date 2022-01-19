@@ -13,17 +13,29 @@
 </head>
 
 <body>
-   
+
 
     <div class="container">
         <div class="row">
-            <div class="col-lg-12" id="player_container">
+            <div class="col-lg-12 mb-3" id="player_container">
+                <video autoplay controls class="player"  type="video/mp4" style="display: none;"></video>
             </div>
+
+            <div class="col-lg-12 mb-3">
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="autoplay_switch" />
+                    <label class="form-check-label" for="autoplay_switch">Autoplay</label>
+                </div>
+            </div>
+
+
             <% for(var video of videos){ %>
-            <div class="col-lg-4 col-sm-6 mb-3">
-               <button class="btn btn-primary w-100 text-center play_btn" data-video_url="/video/<%- video.url %>"><%- video.name %></button>
-            </div>
-            <% }%>
+                <div class="col-lg-4 col-sm-6 mb-3">
+                    <button class="btn btn-primary w-100 text-center play_btn" data-video_url="/video/<%- video.url %>">
+                        <%- video.name %>
+                    </button>
+                </div>
+                <% }%>
         </div>
     </div>
 
